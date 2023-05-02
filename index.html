@@ -3,49 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Top Bar Menu</title>
+  <title>Top Bar with Dropdown Menu</title>
 </head>
 <body>
-  <h1>Top Bar Menu</h1>
- 
-
-  <div class="top-bar-menu">
-    <a href="#home">Home</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
+  <div class="top-bar">
+    <a href="#">Home</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+    <div class="dropdown">
+      <button class="dropbtn">Dropdown</button>
+      <div class="dropdown-content">
+        <a href="#">Link 1</a>
+        <a href="#">Link 2</a>
+        <a href="#">Link 3</a>
+      </div>
+    </div>
   </div>
-
   <script>
-    function renderMenu() {
-      var menu = document.getElementById("top-bar-menu");
-
-      for (var i = 0; i < menuItems.length; i++) {
-        var menuItem = menuItems[i];
-
-        var link = document.createElement("a");
-        link.href = menuItem.url;
-        link.textContent = menuItem.text;
-
-        menu.appendChild(link);
+    function toggleDropdown() {
+      var dropdown = document.querySelector('.dropdown');
+      var dropdownContent = dropdown.querySelector('.dropdown-content');
+      if (dropdownContent.style.display === 'block') {
+        dropdownContent.style.display = 'none';
+      } else {
+        dropdownContent.style.display = 'block';
       }
     }
-
-    var menuItems = [
-      {
-        text: "Home",
-        url: "#home"
-      },
-      {
-        text: "About",
-        url: "#about"
-      },
-      {
-        text: "Contact",
-        url: "#contact"
-      }
-    ];
-
-    window.onload = renderMenu;
+    document.querySelector('.dropbtn').addEventListener('click', toggleDropdown);
   </script>
 </body>
 </html>
