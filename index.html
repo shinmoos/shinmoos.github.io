@@ -1,22 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>즐겨찾기</title>
-</head>
-<body>  
-  <div>
-    <label for="info">Info</label>
-    <select id="info" onchange="this.nextElementSibling.style.display = this.value ? 'block' : 'none';">
-      <option value="">Select a submenu</option>
-      <option value="youtube">YouTube</option>
-      <option value="daum">Daum</option>
-    </select>
-    <ul style="display: none;">
-      <li><a href="https://www.youtube.com">YouTube</a></li>
-      <li><a href="https://www.daum.net">Daum</a></li>
-    </ul>
-  </div>  
-</body>
+<html>
+  <head>
+    <title>Dropdown Menu Example</title>
+    <style>
+      .dropdown {
+        position: relative;
+        display: inline-block;
+      }
+
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        z-index: 1;
+      }
+
+      .dropdown:hover .dropdown-content {
+        display: block;
+      }
+
+      .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+      }
+
+      .dropdown-content a:hover {
+        background-color: #f1f1f1;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="dropdown">
+      <a href="#">Info</a>
+      <div class="dropdown-content">
+        <a href="#">유튜브</a>
+        <a href="#">다음</a>
+      </div>
+    </div>
+
+    <script>
+      const youtubeLink = "https://www.youtube.com";
+
+      const youtubeMenuItem = document.querySelector(".dropdown-content a:first-child");
+
+      youtubeMenuItem.addEventListener("click", function (event) {
+        event.preventDefault();
+        window.location.href = youtubeLink;
+      });
+    </script>
+  </body>
 </html>
