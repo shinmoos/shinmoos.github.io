@@ -3,25 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Top Bar with Dropdown Menu</title>
+  <title>Dropdown Menu</title>
 </head>
 <body>
-  <div class="top-bar">
-    <a href="#">Home</a>
-    <a href="#">About</a>
-    <a href="#">Contact</a>
-    <div class="dropdown">
-      <button class="dropbtn">Dropdown</button>
-      <div class="dropdown-content">
-        <a href="#">Link 1</a>
-        <a href="#">Link 2</a>
-        <a href="#">Link 3</a>
-      </div>
+  <div id="dropdown">
+    <button class="dropbtn">Movie</button>
+    <div class="dropdown-content">
+      <a href="#">Info</a>
+      <a href="#">Etc</a>
     </div>
+  </div>
+  <div id="submenu1">
+    <a href="#">Submenu 1</a>
+    <a href="#">Submenu 2</a>
+    <a href="#">Submenu 3</a>
+  </div>
+  <div id="submenu2">
+    <a href="#">Submenu 1</a>
+    <a href="#">Submenu 2</a>
+    <a href="#">Submenu 3</a>
   </div>
   <script>
     function toggleDropdown() {
-      var dropdown = document.querySelector('.dropdown');
+      var dropdown = document.getElementById('dropdown');
       var dropdownContent = dropdown.querySelector('.dropdown-content');
       if (dropdownContent.style.display === 'block') {
         dropdownContent.style.display = 'none';
@@ -29,7 +33,7 @@
         dropdownContent.style.display = 'block';
       }
     }
-    document.querySelector('.dropbtn').addEventListener('click', toggleDropdown);
+    document.getElementById('dropdown').addEventListener('click', toggleDropdown);
   </script>
 </body>
 </html>
