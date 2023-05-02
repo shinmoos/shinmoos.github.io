@@ -34,6 +34,14 @@
       }
     }
     document.getElementById('dropdown').addEventListener('click', toggleDropdown);
+    
+    // Hide submenus when top menu is clicked
+    document.getElementById('dropdown').addEventListener('click', function() {
+      var submenus = document.querySelectorAll('.dropdown-content');
+      for (var i = 0; i < submenus.length; i++) {
+        submenus[i].style.display = 'none';
+      }
+    });
   </script>
 </body>
 </html>
