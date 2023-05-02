@@ -1,3 +1,4 @@
+/* Dropdown menu style */
 .dropdown {
     position: relative;
     display: inline-block;
@@ -8,10 +9,9 @@
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
-}
-
-
-.dropdown:hover {
+  }
+  
+  .dropdown:hover {
     background-color: #ddd;
   }
   
@@ -23,6 +23,10 @@
     background-color: #f9f9f9;
     border-radius: 5px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
   }
   
   .dropdown-content a {
