@@ -1,63 +1,125 @@
+
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <title>한글 존칭어 삭제</title>
     <style>
-        #workPad {            
-            resize: vertical;                       
+        #workPad {
+            font-family: sans-serif;
+            resize: vertical;
+            height: 30%;
+            width: 80%;
             box-sizing: border-box;
+            padding: 10px;
             border: 1px solid #ccc;
             display: block;
+            background-color: rgb(239, 224, 211);
         }
-        #outPut {
-        	border: 1px solid #ccc;
-            display: block;
-            font-size:90%;
-        }
-        body,
-        html {
+        body, html {
             height: 100%;
-            margin: 6;
-            background-color: white;
+            padding: 10;
+            background-color: rgb(46, 36, 27);
+        }
+        div {
+            font-family: sans-serif;
+            height: 70%;
+            padding: 10px;
+            margin-top: 4px;            
+            border: 1px solid #ccc;
+            overflow-y: scroll;
+            font-size: small;
+            display: block;
+            background-color: rgb(232, 240, 221);   
         }
     </style>
-    <script src="https://firebasestorage.googleapis.com/v0/b/sezzigaldrive.appspot.com/o/marked.js?alt=media&token=e16f929d-d06e-481a-8032-e7f352932b0d"></script>
 </head>
-<body>
-    <textarea id="workPad" style="width: 100%;height: 20%;resize: none;"></textarea>
-    <div id="outPut"></div>
+<body>    
+    <button onclick="pasteToWorkPad()">붙여넣기</button>
+    <textarea id="workPad" style="width: 100%;height: 20%;resize: none;"></textarea>  
+    <button onclick="copyToClipboard()">복사하기</button>    
+    <textarea id="outPut" style="width: 100%;height: 80%;resize: none;"></textarea>
+    
     <script>
         const ta = document.getElementById("workPad");
         const outPut = document.getElementById("outPut");
-        ta.addEventListener("input", () => {
-           simplify();
-        });
         const r = {
-            "합니다": "한다",
-            "입니다": "이다",
-            "습니다": "다",                 
-            "됩니다":"된다",
+            // 존댓말 삭제
+            "여러분은":"사용자는",
+            "사용자분이":"사용자가",
+            "사용자분":"사용자",
+            "봅시다":"보자",
+            "하십시오":"하라",
+            "하시면":"하면",
+            "중요합니다":"중요하다",
+            "필요합니다":"필요하다",
+            "가능합니다":"가능하다",
+            "바꿉니다":"바꾼다",
             "않습니다":"않는다",
             "가집니다":"가진다",
+            "만듭니다":"만든다",
             "냅니다":"낸다",
             "없습니다":"없다",
             "집니다":"진다",
             "바랍니다":"바란다",
             "옵니다":"온다",
             "세요":"라",
-            "여러분은":"사용자는",
-            "가리킵니다":"가리킨다", 
-            "//":"<br>"
+            "말씀드리면":"말하면",
+            "하신":"한",
+            "말씀":"말",
+            "줍니다":"준다",
+            "릅니다":"른다",
+            "합니다": "한다",
+            "입니다": "이다",
+            "습니다": "다",                 
+            "됩니다":"된다",
+            "네,":"그렇다,",
+            "저의":"나의",
+            "제가":"내가",
+            " 제 ":" 나의 ",
+            "드리도록":"주도록",
+            "배우십시오":"배우라",
+
         };
+
+        ta.addEventListener("input", () => {
+           simplify();
+        });
         function simplify() {
             var t = ta.value;
             for (let [key, value] of Object.entries(r)) {
                 let regex = new RegExp(key, "g");
                 t = t.replace(regex, value);
-            }
-            outPut.innerHTML = marked(t);
-        };
+            }            
+       
+            outPut.value=t;
+        }
+
+        function pasteToWorkPad() {
+            navigator.clipboard.readText()
+            .then(text => {
+                ta.value = text;
+                simplify();
+            })
+            .catch(err => {
+                console.error('Failed to read clipboard contents: ', err);
+            });
+        }
+
+        function copyToClipboard() {			
+			let range = document.createRange();
+			range.selectNode(outPut);
+			window.getSelection().removeAllRanges();
+			window.getSelection().addRange(range);
+
+			// 텍스트 복사
+			document.execCommand("copy");
+
+			// 선택 해제
+			window.getSelection().removeAllRanges();
+        }
+
     </script>
 </body>
 </html>
